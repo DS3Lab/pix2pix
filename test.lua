@@ -29,8 +29,8 @@ opt = {
     serial_batches = 1,       -- if 1, takes images in order to make batches, otherwise takes them randomly
     serial_batch_iter = 1,    -- iter into serial image list
     cudnn = 1,                -- set to 0 to not use cudnn (untested)
-    checkpoints_dir = './checkpoints', -- loads models from here
-    results_dir='./results/',          -- saves results here
+    checkpoints_dir = '/mnt/ds3lab/roou_v1_checkpoint/', -- loads models from here
+    results_dir='/mnt/ds3lab/roou_v1_results/',          -- saves results here
     which_epoch = 'latest',            -- which epoch to test? set to 'latest' to use latest cached model
 }
 
@@ -154,13 +154,14 @@ io.output(paths.concat(opt.results_dir,opt.netG_name .. '_' .. opt.phase, 'index
 
 io.write('<table style="text-align:center;">')
 
-io.write('<tr><td>Image #</td><td>Input</td><td>Output</td><td>Ground Truth</td></tr>')
+io.write('<tr><td>Image #</td><td>Input</td><td>Output</td><td>Ground Truth</td><td>DeConv</td></tr>')
 for i=1, #filepaths do
     io.write('<tr>')
     io.write('<td>' .. filepaths[i] .. '</td>')
     io.write('<td><img src="./images/input/' .. filepaths[i] .. '"/></td>')
     io.write('<td><img src="./images/output/' .. filepaths[i] .. '"/></td>')
     io.write('<td><img src="./images/target/' .. filepaths[i] .. '"/></td>')
+    io.write('<td><img src="./images/deconv/' .. filepaths[i] .. '"/></td>')
     io.write('</tr>')
 end
 
